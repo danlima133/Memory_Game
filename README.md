@@ -1,2 +1,6 @@
-# Memory_Game
-Um jogo da memória simples usando PhaserJS. Projeto com o intuito de praticar Javascript
+# Memory Game
+Jogo da memória feito para estudar Javascript e trabalhar com games na web com o framework PhaserJS.
+
+## Ferramentas utilizadas
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
+![PhaserJS](https://img.shields.io/badge/PhaserJS-1E90FF?logo=phaser&logoColor=white&style=for-the-badge)
