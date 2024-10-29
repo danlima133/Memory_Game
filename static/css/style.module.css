@@ -1,10 +1,4 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-h1 {
+:local .title {
     margin: 20px;
     padding: 8px;
     text-align: center;
@@ -12,12 +6,12 @@ h1 {
     border-radius: 8px;
 }
 
-img {
+:local .background {
     width: 100%;
     border-radius: 12px;
 }
 
-p {
+:local .text {
     background-color: gainsboro;
     padding: 12px;
     text-align: center;
