@@ -1,20 +1,27 @@
 * {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 h1 {
     margin: 20px;
     padding: 8px;
     text-align: center;
-}
-
-#game {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
-
-#game canvas {
+    background-color: gainsboro;
     border-radius: 8px;
+}
+
+img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+p {
+    background-color: gainsboro;
+    padding: 12px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 10px 10px 0px 10px;
 }
