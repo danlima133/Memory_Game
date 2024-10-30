@@ -45,6 +45,12 @@ module.exports = {
             filename: 'style.css'
         })
     ],
+    resolve: {
+        alias: {
+            '@modules': path.resolve(__dirname, '../src/modules'),
+            "@components": path.resolve(__dirname, '../components')
+        }
+    },
     devServer: {
         port: 3000,
         open: false
