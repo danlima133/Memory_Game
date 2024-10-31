@@ -41,9 +41,18 @@ export class Footer extends Container {
     }
 }
 
-export const Layout = function() {
+export const Layout = function(template = []) {
     this.layout = []
-    this.root
+    if (template.length !== 0) {
+        let elements = this.layout.concat(template)
+        let newLayout = []
+        for (let element of elements) {
+            console.log(element)
+            newLayout.push(element.cloneNode(true)) 
+        }
+        this.layout = newLayout
+    }
+    this.connections = []
     this.main = function(main) {
         this.layout.push(main.getContainer())
         return this
@@ -61,26 +70,40 @@ export const Layout = function() {
         return this
     }
     this.bind = function(container) {
-        this.build(container.getContainer())
+        this.connections.push(container)
+        return this.build(container.getContainer(), true)
     }
     this.deploy = function() {
-        this.build(document.body)
+        return this.build(document.body)
     }
-    this.build = function(root) {
-        this.root = root
+    this.build = function(root, clone = false) {
         for (let element of this.layout) {
-            root.appendChild(element)
-        } 
+            root.appendChild(clone ? element.cloneNode(true) : element)
+        }
+        return clone ? new Layout(root.children) : this
     }
     this.clear = function() {
-        this.root = null
+        this.connections = {}
         this.layout = []
-    } 
-    this.desconect = function() {
-        if (this.root) {
-            for (let element of this.layout) {
-                this.root.removeChild(element)
-            }
+    }
+    this.remove = function() {
+        for (let element of this.layout) {
+            element.remove()
         }
-    } 
+    }
+    this.desconect = function(...containers) {
+        for (let container of containers) {
+            let targetIdx = this.connections.indexOf(container)
+            let target = this.connections[targetIdx].getContainer()
+            target.remove()
+        }
+    }
+    this.getLayout = function() {
+        let layout = []
+        console.log(this.layout)
+        for (let container of this.layout) {
+            layout.push(container.getContainer())
+        }
+        return layout
+    }
 }
