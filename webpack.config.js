@@ -41,18 +41,29 @@ module.exports = {
             filename: 'index.html',
             title: 'Memory Game'
         }),
+        new htmlWebpackPlugin({
+            filename: '404.html',
+            template: './static/html/404.html',
+            inject: false
+        }),
         new cssMiniExtractPlugin({
             filename: 'style.css'
         })
     ],
     resolve: {
         alias: {
-            '@modules': path.resolve(__dirname, '../src/modules'),
-            "@components": path.resolve(__dirname, '../components')
+            '@modules': path.resolve(__dirname, 'src/modules'),
+            "@components": path.resolve(__dirname, 'components'),
+            '@HTMLelements': path.resolve(__dirname, 'src/modules/HTMLelements.js')
         }
     },
     devServer: {
         port: 3000,
-        open: false
+        open: false,
+        historyApiFallback: {
+            rewrites: [
+                { from: /(\w+|\/)+/, to: '/404.html' }
+            ]
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '../../src/modules/components.js'
+import { Component } from '@modules/components.js'
 import { panel, title } from './style.module.css'
 
 export class Title extends Component {
