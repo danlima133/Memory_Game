@@ -1,19 +1,30 @@
-import imgBackground from '../static/assets/background1.png'
-import { title, background, text } from '../static/css/style.module.css'
-import '../static/css/main.css'
+import '../static/css/style.css'
+import { P } from '@HTMLelements'
+import * as modules from '@modules/index'
+import { Title } from '@components/title/component'
+import { TextBox } from '@components/textBox/component'
+import bg from '@static/assets/background2.png'
 
-const h1 = document.createElement("h1")
-h1.innerHTML = "Memory Game"
-h1.classList.add(title)
+const header = new modules.Header()
+const main = new modules.Main()
 
-const bg = document.createElement("img")
-bg.src = imgBackground
-bg.classList.add(background)
+const mainTitle = new Title({
+    text: 'Memory Game'
+}).buildComponent()
 
-const description = document.createElement("p")
-description.innerHTML = "Um jog da memória feito com o framework PhaserJS. Projeto com intuito de praticar Javascript, Webpack e Phaser."
-description.classList.add(text)
+const descriptionGame = new TextBox({
+    text: 'Um jogo da memória feito com o framework PhaserJS.',
+    textAlign: 'left',
+    img: bg
+}).buildComponent()
 
-document.getElementsByTagName("body")[0].appendChild(h1)
-document.getElementsByTagName("body")[0].appendChild(bg)
-document.getElementsByTagName("body")[0].appendChild(description)
+header.addComponent(mainTitle)
+main.addComponent(descriptionGame)
+
+const view = new modules.Layout()
+
+view.header(header)
+view.main(main)
+
+view.deploy()
+
