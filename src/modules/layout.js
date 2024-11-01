@@ -44,10 +44,10 @@ export class Footer extends Container {
 export const Layout = function(template = []) {
     this.layout = []
     if (template.length !== 0) {
-        let elements = this.layout.concat(template)
+        let elements = this.layout.concat([...template])
+        console.log(elements)
         let newLayout = []
         for (let element of elements) {
-            console.log(element)
             newLayout.push(element.cloneNode(true)) 
         }
         this.layout = newLayout
@@ -83,7 +83,7 @@ export const Layout = function(template = []) {
         return clone ? new Layout(root.children) : this
     }
     this.clear = function() {
-        this.connections = {}
+        this.desconect()
         this.layout = []
     }
     this.remove = function() {
@@ -92,11 +92,31 @@ export const Layout = function(template = []) {
         }
     }
     this.desconect = function(...containers) {
-        for (let container of containers) {
-            let targetIdx = this.connections.indexOf(container)
-            let target = this.connections[targetIdx].getContainer()
-            target.remove()
+        let elements = containers
+        if (containers.length === 0) {
+            elements = this.connections
         }
+        let connectionsToRemove = []
+        for (let container of elements) {
+            let targetIdx = this.connections.indexOf(container)
+            let target = this.connections[targetIdx]
+            target.getContainer().remove()
+            connectionsToRemove.push(target)
+        }
+        if (containers.length === 0 || containers.length === this.connections.length) {
+            this.connections = []
+            console.log('remove all')
+            return
+        }
+        let newConnectionsList = this.connections.filter(element => {
+            for (let connection of connectionsToRemove) {
+                if (connection === element)
+                    return false
+            }
+            return true
+        })
+        console.log(newConnectionsList)
+        this.connections = newConnectionsList
     }
     this.getLayout = function() {
         let layout = []

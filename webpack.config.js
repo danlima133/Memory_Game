@@ -53,7 +53,8 @@ module.exports = {
     resolve: {
         alias: {
             '@modules': path.resolve(__dirname, 'src/modules'),
-            "@components": path.resolve(__dirname, 'components'),
+            '@components': path.resolve(__dirname, 'components'),
+            '@static': path.resolve(__dirname, 'static'),
             '@HTMLelements': path.resolve(__dirname, 'src/modules/HTMLelements.js')
         }
     },
